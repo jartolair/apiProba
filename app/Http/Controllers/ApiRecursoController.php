@@ -14,8 +14,13 @@ class ApiRecursoController extends Controller
      */
     public function index()
     {
-        $usuarios=Usuario::all();
-        return $usuarios;
+        $client = new \GuzzleHttp\Client();
+        $res = $client->get('https://jsonplaceholder.typicode.com/todos/1');
+        $body= $res->getBody(); 
+        $content = $body->getContents(); 
+        $json = json_decode($content, true); 
+        //$usuarios=Usuario::all();
+        return $json;
     }
 
     /**
